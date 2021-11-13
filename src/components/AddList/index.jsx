@@ -1,22 +1,20 @@
 import React, { useState } from "react";
+
+import Badge from "../Badge";
+
 import List from "../List";
 
 import "./AddButtonList.scss";
-const AddListButton = () => {
-  const [visiblePopup, setVisiblePopup] = useState(false);
-
-  const onAddPopup = () => {
-    setVisiblePopup(!visiblePopup);
-  };
+const AddList = ({ colors }) => {
+  const [visiblePopup, setVisiblePopup] = useState(true);
 
   return (
     <div className="add-list">
       <List
-        onClick={onAddPopup}
+        onClick={() => setVisiblePopup(true)}
         items={[
           {
             className: "list__add-button",
-
             icon: (
               <svg
                 width="12"
@@ -46,13 +44,16 @@ const AddListButton = () => {
         ]}
       />
 
-      {visiblePopup &&
-        ((
-          <div className="add-list__popup">
-            <h1>123</h1>
+      {visiblePopup && (
+        <div className="add-list__popup">
+          <input className="field" type="text" placeholder="Название списка" />
+          <div className="add-list__popup-colors">
+            <Badge color="green" />
           </div>
-        ): "")}
+          <button className="button">Добавить</button>
+        </div>
+      )}
     </div>
   );
 };
-export default AddListButton;
+export default AddList;
